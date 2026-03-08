@@ -1,17 +1,24 @@
 pipeline {
     agent any
 
-    stages {
+    triggers {
+        githubPush()
+    }
 
+    stages {
         stage('Install') {
             steps {
-                bat 'npm install'
+                dir('C:/Users/hp/calculator-app') {
+                    bat 'npm install'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                bat 'npm test'
+                dir('C:/Users/hp/calculator-app') {
+                    bat 'npm test'
+                }
             }
         }
 
@@ -20,7 +27,6 @@ pipeline {
                 echo 'Build success'
             }
         }
-
     }
 
     post {
